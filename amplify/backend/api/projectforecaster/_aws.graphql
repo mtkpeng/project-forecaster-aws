@@ -126,3 +126,4 @@ input TimestampConfiguration {
     createdAt: String
     updatedAt: String
 }
+directive @function(name:String!) on FIELD_DEFINITION

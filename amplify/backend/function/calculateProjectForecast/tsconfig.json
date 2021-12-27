@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2017",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "outDir": "src",
+    "sourceMap": true
+  },
+  "include": ["ts/**/*"],
+  "exclude": ["src/node_modules", "src/**/*.spec.ts"]
+}
