@@ -1,0 +1,1 @@
+cd amplify/backend/function/calculateProjectForecast && tsc && cd -

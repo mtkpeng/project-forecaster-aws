@@ -22,4 +22,4 @@ amplifytools.xcconfig
 /amplify/backend/api/projectforecaster/cli-inputs.json
 /amplify/backend/function/*/src
 src/graphql
-src/API.ts
+src/API.d.ts

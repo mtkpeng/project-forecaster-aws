@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "amplify:calculateProjectForecast": "cd amplify/backend/function/calculateProjectForecast && tsc"
+    "amplify:calculateProjectForecast": "pushd . ; cd amplify/backend/function/calculateProjectForecast ; tsc ; popd"
   },
   "dependencies": {
     "@types/aws-lambda": "^8.10.88"

@@ -1,7 +1,7 @@
 import {
     AppSyncResolverEvent
 } from 'aws-lambda';
-import type {GetProjectForecastQueryVariables} from "./API"
+import type {GetProjectForecastQueryVariables} from "../../../../../src/API"
 
 const simulationRuns = 10000
 

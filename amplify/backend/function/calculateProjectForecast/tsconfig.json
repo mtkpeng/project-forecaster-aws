@@ -8,5 +8,5 @@
     "sourceMap": true
   },
   "include": ["ts/**/*"],
-  "exclude": ["src/node_modules", "src/**/*.spec.ts"]
+  "exclude": ["src/node_modules", "src/**/*.spec.ts", "../projectforecastersharedlayer/opt/API"]
 }
