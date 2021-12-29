@@ -2,6 +2,11 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
+type Velocities @model {
+  id: ID!
+  velocities: [Int!]!
+}
+
 type Query {
-  getProjectForecast(velocities: [Int!]!, target: Int!, confidence: Float): Int @function(name: "calculateProjectForecast-${env}")
+  getProjectForecast(velocitiesId: ID!, target: Int!, confidence: Float): Int @function(name: "calculateProjectForecast-${env}")
 }

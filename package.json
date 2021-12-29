@@ -3,6 +3,10 @@
     "amplify:calculateProjectForecast": "pushd . ; cd amplify/backend/function/calculateProjectForecast ; tsc ; popd"
   },
   "dependencies": {
-    "@types/aws-lambda": "^8.10.88"
+    "@types/aws-lambda": "^8.10.88",
+    "aws-sdk": "^2.1048.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.5"
   }
 }

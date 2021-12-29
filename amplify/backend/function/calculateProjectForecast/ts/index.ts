@@ -1,9 +1,11 @@
-import {
-    AppSyncResolverEvent
-} from 'aws-lambda';
-import type {GetProjectForecastQueryVariables} from "../../../../../src/API"
+import {AppSyncResolverEvent} from 'aws-lambda';
+import {DynamoDB} from 'aws-sdk';
+import type {GetProjectForecastQueryVariables} from "../../../../../src/API";
 
-const simulationRuns = 10000
+const simulationRuns = 10000;
+const docClient = new DynamoDB.DocumentClient({
+    endpoint: process.env.DDB_ENDPOINT,
+});
 
 export const handler = async (
     event: AppSyncResolverEvent<GetProjectForecastQueryVariables, number>
@@ -18,10 +20,29 @@ export const handler = async (
         confidence = conf;
     }
 
-    return projectForecast(event.arguments.velocities, event.arguments.target, confidence);
-};
+    return projectForecast(event.arguments.velocitiesId, event.arguments.target, confidence);
+}
 
-async function projectForecast(velocities: number[], target: number, confidence: number, runs = simulationRuns): Promise<number> {
+async function getVelocities(key: string): Promise<number[]> {
+    const request = {
+        TableName: process.env.API_PROJECTFORECASTER_VELOCITIESTABLE_NAME,
+        Key: {
+            id: key
+        },
+        ProjectionExpression: "velocities"
+    }
+
+    try {
+        const data = await docClient.get(request).promise();
+        return data.Item['velocities'];
+    } catch (error) {
+        console.log("error", error);
+        return error;
+    }
+}
+
+async function projectForecast(id: string, target: number, confidence: number, runs = simulationRuns): Promise<number> {
+    const velocities = await getVelocities(id);
     const forecasts = await Promise.all([...Array(runs)].map(async (_, i) => singleForecast(velocities, target)));
 
     return forecasts.sort(function(a, b) {return a - b})[Math.floor((runs - 1) * confidence)];
